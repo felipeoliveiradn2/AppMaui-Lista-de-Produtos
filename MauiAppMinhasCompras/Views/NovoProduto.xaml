@@ -8,9 +8,8 @@
         <ToolbarItem Text = "Salvar"/>
         <ToolbarItem Text = "Adicionar" Clicked="ToolbarItem_Clicked" />
     </ContentPage.ToolbarItems>
-    
- 
-<!-- Campos criados para escrever texto, quantidade e preco -->
+
+    <!-- Campos criados para escrever texto, quantidade e preco -->
     <VerticalStackLayout Spacing="10" Padding="10">
         <Label Text="Descrição do Produto: " />
         <Entry x:Name="txt_descricao"/>
