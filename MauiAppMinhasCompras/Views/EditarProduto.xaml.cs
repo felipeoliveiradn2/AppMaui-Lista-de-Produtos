@@ -1,3 +1,4 @@
+
 using MauiAppMinhasCompras.Models;
 
 namespace MauiAppMinhasCompras.Views;
@@ -8,27 +9,28 @@ public partial class EditarProduto : ContentPage
 	{
 		InitializeComponent();
 	}
-	private async void ToolbarItem_Clicked(object sender, EventArgs e) {
+    private async void ToolbarItem_Clicked(object sender, EventArgs e)
+    {
         try
-        { //instanciação de um novo produto
-
-            Produto produto_anexado = BindingContext as Produto;
+        {
             Produto p = new Produto
             {
-                Id = produto_anexado.Id,
                 Descricao = txt_descricao.Text,
-                //convert para transformar texto em numeros double
-                Quantidade = Convert.ToDouble(txt_quantidade.Text),
-                Preco = Convert.ToDouble(txt_preco.Text)
+                Quantidade = double.Parse(txt_quantidade.Text),
+                Preco = double.Parse(txt_preco.Text)
             };
-            //usar o await para aguardar o retorno do usuario
+
+            // Chama validação aqui, só para os valores do usuário
+            p.Validar();
+
+            // Salva no banco
             await App.Db.Update(p);
-            await DisplayAlert("Sucesso!", "Registro Invalido", "OK");
-            await Navigation.PopAsync();
+
+            await DisplayAlert("Sucesso", $"Produto {p.Descricao} salvo!\nTotal: {p.Total}", "OK");
         }
-        catch (Exception ex) // catch para tratar erros
+        catch (Exception ex)
         {
-            DisplayAlert("Ops", ex.Message, "OK");
+            await DisplayAlert("Erro", ex.Message, "OK");
         }
     }
 }

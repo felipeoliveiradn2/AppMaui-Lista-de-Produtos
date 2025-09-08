@@ -70,16 +70,16 @@ public partial class ListaProduto : ContentPage
 
 	private void ToolbarItem_Clicked_1(object sender, EventArgs e)
 	{
-		double soma = lista.Sum(i => i.Total);
+		double? soma = lista.Sum(i => i.Total);
 
 		string msg = $"O total é {soma:C}";
 
 		DisplayAlert("Total dos Produtos", msg, "OK");
 	}
 
-	private async Task MenuItem_Clicked(object sender, EventArgs e)
-	{
-		/* pega o BindingContext do MenuItem (que é o objeto associado àquela linha da lista)
+    private async void MenuItem_Clicked(object sender, EventArgs e)
+    {
+        /* pega o BindingContext do MenuItem (que é o objeto associado àquela linha da lista)
 		var produto = (sender as MenuItem)?.BindingContext as Produto;
 		if (produto != null)
 		{
@@ -89,7 +89,7 @@ public partial class ListaProduto : ContentPage
 				lista.Remove(item);
 		*/
 
-		try
+        try
 		{
 			MenuItem selecionado = sender as MenuItem;
 
